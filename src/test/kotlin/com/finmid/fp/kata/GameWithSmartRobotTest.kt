@@ -7,7 +7,7 @@ class GameWithSmartRobotTest {
     @Test
     fun `robot moves and walks around the tree`() {
         val result =
-            rideRobot(
+            moveRobot(
                 """
                 .R.
                 .T.
@@ -27,7 +27,7 @@ class GameWithSmartRobotTest {
     @Test
     fun `robot moves and walks around multiple trees`() {
         val result =
-            rideRobot(
+            moveRobot(
                 """
                 ..R
                 .TT
@@ -47,7 +47,7 @@ class GameWithSmartRobotTest {
     @Test
     fun `robot moves and walks around forest of trees`() {
         val result =
-            rideRobot(
+            moveRobot(
                 """
                 ..R.
                 .TT.
@@ -71,7 +71,7 @@ class GameWithSmartRobotTest {
     @Test
     fun `robot does not move if there are no free spaces`() {
         val result =
-            rideRobot(
+            moveRobot(
                 """
                 RT
                 TT

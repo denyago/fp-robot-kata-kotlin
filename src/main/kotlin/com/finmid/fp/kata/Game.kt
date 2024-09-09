@@ -1,6 +1,7 @@
 package com.finmid.fp.kata
 
-fun rideRobot(
+@Suppress("UNUSED_PARAMETER")
+fun moveRobot(
     textMap: String,
     moveCommands: String,
 ): String = textMap

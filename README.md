@@ -17,3 +17,14 @@ Limitations. You can't ...:
 - use any loops
 - use any mutable data structures
 - do `try { } catch { }` or `throw`
+
+## Install
+
+- Use Java 21 or higher
+
+## Run
+
+- Run the tests with `./gradlew test`
+
+See also [Functional Programming Kata in Typescript
+](https://github.com/denyago/fp-robot-kata-typescript).

@@ -7,7 +7,7 @@ class GameWithDumbRobotTest {
     @Test
     fun `robot moves`() {
         val result =
-            rideRobot(
+            moveRobot(
                 """
                 R..
                 ...
@@ -27,7 +27,7 @@ class GameWithDumbRobotTest {
     @Test
     fun `robot moves multiple times`() {
         val result =
-            rideRobot(
+            moveRobot(
                 """
                 R..
                 ...
@@ -47,7 +47,7 @@ class GameWithDumbRobotTest {
     @Test
     fun `robot moves multiple times and hits the wall`() {
         val result =
-            rideRobot(
+            moveRobot(
                 """
                 R..
                 ...
@@ -67,7 +67,7 @@ class GameWithDumbRobotTest {
     @Test
     fun `robot moves and hits the tree`() {
         val result =
-            rideRobot(
+            moveRobot(
                 """
                 R..
                 .T.
