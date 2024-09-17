@@ -1,6 +1,5 @@
 package com.finmid.fp.kata
 
-@Suppress("UNUSED_PARAMETER")
 fun moveRobot(
     textMap: String,
     moveCommands: String,
@@ -11,12 +10,40 @@ private fun Map.applyCommands(parsedCommands: List<Direction>): Map = parsedComm
         map.applyCommand(command)
     }
 
-private fun Map.applyCommand(command: Direction): Map = when (command) {
-    Direction.UP -> this.copy(robot = this.robot.copy(y = this.robot.y + 1))
-    Direction.DOWN -> this.copy(robot = this.robot.copy(y = this.robot.y - 1))
-    Direction.LEFT -> this.copy(robot = this.robot.copy(x = this.robot.x - 1))
-    Direction.RIGHT -> this.copy(robot = this.robot.copy(x = this.robot.x + 1))
+fun Map.applyCommand(command: Direction): Map = when (command) {
+    Direction.UP -> {
+        (this.robot.y - 1)
+            .takeUnless { it < 0 }
+            ?.takeUnless { Position(this.robot.x, it).doesCollideWithObstacles(this.obstacles) }
+            ?.let { this.copy(robot = this.robot.copy(y = it)) }
+            ?: this
+    }
+
+    Direction.DOWN -> {
+        (this.robot.y + 1)
+            .takeUnless { it > this.height - 1 }
+            ?.takeUnless { Position(this.robot.x, it).doesCollideWithObstacles(this.obstacles) }
+            ?.let { this.copy(robot = this.robot.copy(y = it)) }
+            ?: this
+    }
+
+    Direction.LEFT -> {
+        (this.robot.x - 1)
+            .takeUnless { it < 0 }
+            ?.takeUnless { Position(it, this.robot.y).doesCollideWithObstacles(this.obstacles) }
+            ?.let { this.copy(robot = this.robot.copy(x = it)) }
+            ?: this
+    }
+
+    Direction.RIGHT -> {
+        (this.robot.x + 1)
+            .takeUnless { it > this.width - 1 }
+            ?.takeUnless { Position(it, this.robot.y).doesCollideWithObstacles(this.obstacles) }
+            ?.let { this.copy(robot = this.robot.copy(x = it)) }
+            ?: this
+    }
 }
 
+fun Map.serialize(): String = serialiseMap(this)
 
-private fun Map.serialize(): String = serialiseMap(this)
+private fun Position.doesCollideWithObstacles(obstacles: List<Position>) = this in obstacles
