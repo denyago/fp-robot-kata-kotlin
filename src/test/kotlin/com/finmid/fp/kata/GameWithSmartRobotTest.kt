@@ -63,8 +63,8 @@ class GameWithSmartRobotTest {
             ....
             .TT.
             ..TT
-            .T..
-            ..R.
+            .TR.
+            ....
             """.trimIndent()
     }
 

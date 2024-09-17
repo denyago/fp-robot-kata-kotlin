@@ -14,13 +14,22 @@ fun moveRobot(map: Map, commands: List<Direction>, curCommand: Int): Map {
         return map
     }
 
-    return moveRobot(map.copy(robot = validatePosition(map, parseDirection(map.robot, commands.get(curCommand)), map.robot, map.obstacles)), commands, curCommand + 1)
+    return moveRobot(map.copy(robot = validatePosition(map, parseDirection(map.robot, commands.get(curCommand)), map.robot, map.obstacles, commands.get(curCommand))), commands, curCommand + 1)
 }
 
-fun validatePosition(map: Map, newPosition: Position, curPosition: Position, obstacles: List<Position>): Position =
+fun validatePosition(map: Map, newPosition: Position, curPosition: Position, obstacles: List<Position>, command: Direction): Position =
     if (!obstacles.contains(newPosition) && newPosition.x >= 0 && newPosition.x < map.width && newPosition.y >= 0 && newPosition.y < map.height) {
         newPosition
-    } else curPosition
+    } else if (obstacles.contains(newPosition) && (
+                (newPosition.x == 0 && command == Direction.LEFT)
+                        || (newPosition.x == map.width -1 && command == Direction.RIGHT)
+                        || (newPosition.y == 0 && command == Direction.UP)
+                        || (newPosition.y == map.height - 1 && command == Direction.DOWN)
+        )) {
+        curPosition
+    } else {
+        validatePosition(map, parseDirection(newPosition, command), curPosition, obstacles, command)
+    }
 
 
 
