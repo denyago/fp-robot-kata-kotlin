@@ -83,4 +83,15 @@ class GameWithDumbRobotTest {
             ...
             """.trimIndent()
     }
+
+    @Test
+    fun `direction changes the position to right`() {
+        val position = Position(15, 15)
+        val direction = Direction.RIGHT
+
+        val result =
+            parseDirection(position, direction)
+
+        result shouldBe Position(16, 15)
+    }
 }
