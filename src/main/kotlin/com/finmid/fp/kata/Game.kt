@@ -5,7 +5,7 @@ fun moveRobot(
     moveCommands: String,
 ): String =
     parseCommands(moveCommands)
-        .fold(parseMap(textMap)) { acc, command -> move(acc, command) }
+        .fold(parseMap(textMap)) { acc, command -> move2(acc, command) ?: acc }
         .let {
             println(it)
             serialiseMap(it)
@@ -17,6 +17,18 @@ fun move(
 ): Map = if (validateMovement2(map, direction)) {
     map.copy(robot = calculateNextPosition(map.robot, direction))
 } else map
+
+fun move2(
+    map: Map,
+    direction: Direction
+): Map? =
+    map.copy(robot = calculateNextPosition(map.robot, direction)).let {
+        when {
+            isOutsideWalls(it) -> null
+            hitTheTree(it) -> move2(it, direction)
+            else -> it
+        }
+    }
 
 fun calculateNextPosition(
     position: Position,
