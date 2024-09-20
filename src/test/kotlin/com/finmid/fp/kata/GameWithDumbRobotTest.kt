@@ -1,6 +1,7 @@
 package com.finmid.fp.kata
 
 import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class GameWithDumbRobotTest {
@@ -65,6 +66,7 @@ class GameWithDumbRobotTest {
     }
 
     @Test
+    @Disabled("Incorrect for the smart robot implementation")
     fun `robot moves and hits the tree`() {
         val result =
             moveRobot(

@@ -85,4 +85,24 @@ class GameWithSmartRobotTest {
             TT
             """.trimIndent()
     }
+
+    @Test
+    fun `robot does not move if there are no free spaces in this direction`() {
+        val result =
+            moveRobot(
+                """
+                .R.
+                TT.
+                .T.
+                """.trimIndent(),
+                "D",
+            )
+
+        result shouldBe
+                """
+            .R.
+            TT.
+            .T.
+            """.trimIndent()
+    }
 }
