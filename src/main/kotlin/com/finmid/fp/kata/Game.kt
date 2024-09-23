@@ -39,7 +39,19 @@ fun getValidCommands(moveCommands: String): Result<List<Direction>> {
         return null to Error("No move commands")
     }
 
+    if (moveCommands.any { it !in "UDLR".toSet() }) {
+        return null to Error(getInvalidCommands(emptyList(), moveCommands).joinToString())
+    }
+
     return parseCommands(moveCommands) to null
+}
+
+fun getInvalidCommands(result: List<String>, directions: String): List<String> {
+    if (directions.isEmpty()) {
+        return result
+    }
+
+    return getInvalidCommands(result + "${directions[0]} is not a valid command", directions.drop(1))
 }
 
 fun moveRobot(
